@@ -1,8 +1,6 @@
-# Portifolio AngularJs
+# AngularJS Gen/
 
-Meu currículo utilizando AngularJS.
+Projeto para geração de aplicação AngularJS.
 
 Próximas melhorias:
- - Dados em JSON
- - Atualizar textos
- - Melhoria no layout para pequenos devices
+ - Gerar Controllers Javascript
