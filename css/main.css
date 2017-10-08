@@ -1,0 +1,74 @@
+body {
+    font-family: 'Nunito', sans-serif;
+}
+
+.header-custom
+{
+    background-color:rgba(55, 118, 142, 0.2);
+}
+
+.sidebar-custom
+{
+    background-color:rgba(86, 143, 165, 0.1);
+}
+
+.main-custom
+{
+    /* background-color:rgba(138, 184, 202, 0.1); */
+}
+
+.footer-custom
+{
+    background-color:rgba(55, 118, 142, 0.1);
+}
+
+.bo1
+{
+    border: 1px solid black;
+}
+
+.bo2
+{
+    border: 1px solid blue;
+}
+
+.bo3
+{
+    border: 1px solid yellow;
+}
+
+.text-primary
+{
+    color:rgba(55, 118, 142, 1) !important;
+}
+.bg-success
+{
+    background-color:rgba(55, 118, 142, 1) !important;
+}
+
+.hidden
+{
+    visibility: hidden;
+}
+
+.round-corners {
+    border-radius: 20px;
+    border: 3px solid rgba(55, 118, 142, 1);
+}
+
+.round-corners-info {
+    border-radius: 20px;
+    border-color: rgba(86, 143, 165, 1);
+}
+
+.grayHover {
+	-webkit-filter: grayscale(100%);
+	filter: grayscale(100%);
+	-webkit-transition: .3s ease-in-out;
+	transition: .3s ease-in-out;
+}
+
+.grayHover:hover{
+	-webkit-filter: grayscale(0);
+	filter: grayscale(0);
+}

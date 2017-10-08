@@ -1,0 +1,130 @@
+<div class="contianer py-5">
+    <div class="container">
+        <div class="row py-3">
+            <div class="col-12">
+                <table id="tablePedido" class="display table table-responsive table-hover table-striped table-bordered bg-faded small" cellspacing="0"
+                    width="100%">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Telefone</th>
+                            <th>Email</th>
+                            <th>Tipo</th>
+                            <th>Tamanho</th>
+                            <th>Quadro</th>
+                            <th>Garfo</th>
+                            <th>Guidão</th>
+                            <th>Aro</th>
+                            <th>Pedivela</th>
+                            <th>Preço</th>
+                            <th>Tempo</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody ng-repeat="pedido in pedidos">
+                        <tr>
+                            <td>{{pedido.nome}}</td>
+                            <td>{{pedido.telefone}}</td>
+                            <td>{{pedido.email}}</td>
+                            <td>{{pedido.tipo}}</td>
+                            <td>{{pedido.tamanho}}</td>
+                            <td>{{pedido.quadro}}</td>
+                            <td>{{pedido.garfo}}</td>
+                            <td>{{pedido.guidao}}</td>
+                            <td>{{pedido.aro}}</td>
+                            <td>{{pedido.pedivela}}</td>
+                            <td>{{pedido.preco}}</td>
+                            <td>{{pedido.tempo}}</td>
+                            <td>
+                                <!-- {{pedido._id}} -->
+                                <button class="btn btn-sm btn-primary" ng-click="editPedido(pedido)"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+                                <button class="btn btn-sm btn-danger" ng-click="removePedido(pedido)"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row py-3">
+            <div class="col-12 text-right">
+                <button class="btn btn-sm btn-primary btn-lg" ng-click="refreshPedidos()"><i class="fa fa-refresh" aria-hidden="true"></i> Atualizar</button>
+            </div>
+        </div>
+        <div class="card header-custom py-3 px-3 my-3">
+            <div class="card-block">
+                <h2 class="card-title text-center">Pedido</h2>
+                <div class="row py-3">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label for="inputId">Id:</label>
+                            <input type="text" class="form-control" id="inputId" ng-model="pedidoForm._id" readonly>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-group">
+                            <label for="inputNome">Nome:</label>
+                            <input type="text" class="form-control" id="inputNome" ng-model="pedidoForm.nome" ng-keyup="pedidoFormKeyUp()">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputTelefone">Telefone:</label>
+                            <input type="text" class="form-control" id="inputTelefone" ng-model="pedidoForm.telefone" ng-keyup="pedidoFormKeyUp()">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputEmail">Email:</label>
+                            <input type="text" class="form-control" id="inputEmail" ng-model="pedidoForm.email" ng-keyup="pedidoFormKeyUp()">
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-group">
+                            <label for="inputTipo">Tipo:</label>
+                            <input type="text" class="form-control" id="inputTipo" ng-model="pedidoForm.tipo" ng-keyup="pedidoFormKeyUp()">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputTipo">Tamanho:</label>
+                            <input type="text" class="form-control" id="inputTamanho" ng-model="pedidoForm.tamanho" ng-keyup="pedidoFormKeyUp()">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputQuadro">Quadro:</label>
+                            <input type="text" class="form-control" id="inputQuadro" ng-model="pedidoForm.quadro" ng-keyup="pedidoFormKeyUp()">
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-group">
+                            <label for="inputGarfo">Garfo:</label>
+                            <input type="text" class="form-control" id="inputGarfo" ng-model="pedidoForm.garfo" ng-keyup="pedidoFormKeyUp()">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputGuidao">Guidão:</label>
+                            <input type="text" class="form-control" id="inputGuidao" ng-model="pedidoForm.guidao" ng-keyup="pedidoFormKeyUp()">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputAro">Aro:</label>
+                            <input type="text" class="form-control" id="inputAro" ng-model="pedidoForm.aro" ng-keyup="pedidoFormKeyUp()">
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-group">
+                            <label for="inputPedivela">Pedivela:</label>
+                            <input type="text" class="form-control" id="inputPedivela" ng-model="pedidoForm.pedivela" ng-keyup="pedidoFormKeyUp()">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPreco">Preço:</label>
+                            <input type="text" class="form-control" id="inputPreco" ng-model="pedidoForm.preco" ng-keyup="pedidoFormKeyUp()">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputTempo">Tempo:</label>
+                            <input type="text" class="form-control" id="inputTempo" ng-model="pedidoForm.tempo" ng-keyup="pedidoFormKeyUp()">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-12 text-right">
+                <button class="btn btn-sm btn-primary" ng-click="submitPedido()" ng-disabled="!pedidoFormChanged"><i class="fa fa-pencil" aria-hidden="true"></i> Salvar</button>
+            </div>
+        </div>
+    </div>
