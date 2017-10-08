@@ -1,4 +1,4 @@
-# AngularJS Gen/
+# AngularJS Gen
 
 Projeto para geração de aplicação AngularJS.
 
