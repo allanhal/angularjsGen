@@ -12,7 +12,6 @@
                             {{#attributes }}
                             <th>{{ display }}</th>
                             {{/attributes }}
-
                             <th>Ações</th>
                         </tr>
 
@@ -24,7 +23,6 @@
                                 \{{ {{firstLowerCase ../name}}.{{attribute}} }}
                             </td>
                             {{/attributes }}
-
                             <td>
                                 <button class="btn btn-sm btn-primary" ng-click="edit{{ name }}({{firstLowerCase name }})"><i class="fa fa-pencil" aria-hidden="true"></i></button>
                                 <button class="btn btn-sm btn-danger" ng-click="remove{{ name }}({{firstLowerCase name }})"><i class="fa fa-trash" aria-hidden="true"></i></button>

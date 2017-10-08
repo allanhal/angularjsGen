@@ -1,57 +1,15 @@
 {
-    // "name": "Pedido",
-    // "attributes": [
-    //     {
-    //         "title": "_Id",
-    //         "type": "string"
-    //     },
-    //     {
-    //         "title": "Nome",
-    //         "type": "string"
-    //     },
-    //     {
-    //         "title": "Telefone",
-    //         "type": "string"
-    //     },
-    //     {
-    //         "title": "Email",
-    //         "type": "string"
-    //     },
-    //     {
-    //         "title": "Tipo",
-    //         "type": "string"
-    //     },
-    //     {
-    //         "title": "Tamanho",
-    //         "type": "string"
-    //     },
-    //     {
-    //         "title": "Quadro",
-    //         "type": "string"
-    //     },
-    //     {
-    //         "title": "Garfo",
-    //         "type": "string"
-    //     },
-    //     {
-    //         "title": "Guidão",
-    //         "type": "string"
-    //     },
-    //     {
-    //         "title": "Aro",
-    //         "type": "string"
-    //     },
-    //     {
-    //         "title": "Pedivela",
-    //         "type": "string"
-    //     },
-    //     {
-    //         "title": "Preço",
-    //         "type": "string"
-    //     },
-    //     {
-    //         "title": "Tempo",
-    //         "type": "string"
-    //     }
-    // ]
+    "_id": "59d661b37423dc0004c1008b",
+    "nome": "Cliente 19",
+    "telefone": "88-99999-88888",
+    "email": "email@email.com",
+    "tipo": "RodaLivre",
+    "tamanho": "Catalina46",
+    "quadro": "Branco",
+    "garfo": "Branco",
+    "guidao": "Riser",
+    "aro": "Preto",
+    "pedivela": "Preto",
+    "preco": "R$ 1.700,00",
+    "tempo": "3 dias"
 }

@@ -19,26 +19,26 @@ body {
 
 .color1
 {
-    /* background-color: rgba(5, 102, 141, 1); */
+    background-color: rgba(5, 102, 141, 0.15);
 }
 
 .color2
 {
-    /* background-color: rgba(2, 128, 144, 1); */
+    background-color: rgba(2, 128, 144, 0.15);
 }
 
 .color3
 {
-    /* background-color: rgba(0, 168, 150, 1); */
+    background-color: rgba(0, 168, 150, 0.15);
 }
 
 .color4
 {
-    /* background-color: rgba(2, 195, 154, 1); */
+    background-color: rgba(2, 195, 154, 0.15);
 }
 
 .color5{
-    background-color: rgba(240, 243, 189, 1);
+    background-color: rgba(240, 243, 189, 0.15);
 }
 
 .bo1
