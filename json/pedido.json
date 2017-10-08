@@ -1,0 +1,70 @@
+{
+    "name": "Pedido",
+    "attributes": [
+        {
+            "attribute": "_id",
+            "display": "Id",
+            "type": "string"
+        },
+        {
+            "attribute": "nome",
+            "display": "Nome",
+            "type": "string"
+        },
+        {
+            "attribute": "telefone",
+            "display": "Telefone",
+            "type": "string"
+        },
+        {
+            "attribute": "email",
+            "display": "Email",
+            "type": "string"
+        },
+        {
+            "attribute": "tipo",
+            "display": "Tipo",
+            "type": "string"
+        },
+        {
+            "attribute": "tamanho",
+            "display": "Tamanho",
+            "type": "string"
+        },
+        {
+            "attribute": "quadro",
+            "display": "Quadro",
+            "type": "string"
+        },
+        {
+            "attribute": "garfo",
+            "display": "Garfo",
+            "type": "string"
+        },
+        {
+            "attribute": "guidao",
+            "display": "Guidão",
+            "type": "string"
+        },
+        {
+            "attribute": "aro",
+            "display": "Aro",
+            "type": "string"
+        },
+        {
+            "attribute": "pedivela",
+            "display": "Pedivela",
+            "type": "string"
+        },
+        {
+            "attribute": "preco",
+            "display": "Preço",
+            "type": "string"
+        },
+        {
+            "attribute": "tempo",
+            "display": "Tempo",
+            "type": "string"
+        }
+    ]
+}

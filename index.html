@@ -17,15 +17,15 @@
 	<link rel="stylesheet" href="css/timeline.css">
 </head>
 
-<body ng-controller="mainController">
+<body>
 
 	<div class="container-fluid">
 		<div ng-include="'header.html'"></div>
 		<div class="row">
-			<div class="col-2 sidebar-custom">
+			<div class="col-2">
 				<div ng-include="'sidebar.html'"></div>
 			</div>
-			<div class="col-10 main-custom">
+			<div class="col-10 color3">
 				<div ng-view></div>
 			</div>
 		</div>
@@ -66,10 +66,13 @@
 <!-- FileSaver -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.3/FileSaver.min.js"></script>
 
+<!-- HandlebarsJS -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.10/handlebars.js"></script>
+
 <!-- Custom -->
 <script type="text/javascript" src="js/main.js"></script>
 <script type="text/javascript" src="js/locationProvider.js"></script>
-<script type="text/javascript" src="js/mainController.js"></script>
+<script type="text/javascript" src="js/genController.js"></script>
 <script type="text/javascript" src="js/pedidoController.js"></script>
 
 </html>

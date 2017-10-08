@@ -4,7 +4,7 @@ body {
 
 .header-custom
 {
-    background-color:rgba(55, 118, 142, 0.2);
+    background-color:rgba(05668D, 118, 142, 0.2);
 }
 
 .sidebar-custom
@@ -12,14 +12,33 @@ body {
     background-color:rgba(86, 143, 165, 0.1);
 }
 
-.main-custom
-{
-    /* background-color:rgba(138, 184, 202, 0.1); */
-}
-
 .footer-custom
 {
     background-color:rgba(55, 118, 142, 0.1);
+}
+
+.color1
+{
+    /* background-color: rgba(5, 102, 141, 1); */
+}
+
+.color2
+{
+    /* background-color: rgba(2, 128, 144, 1); */
+}
+
+.color3
+{
+    /* background-color: rgba(0, 168, 150, 1); */
+}
+
+.color4
+{
+    /* background-color: rgba(2, 195, 154, 1); */
+}
+
+.color5{
+    background-color: rgba(240, 243, 189, 1);
 }
 
 .bo1

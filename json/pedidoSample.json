@@ -1,0 +1,57 @@
+{
+    // "name": "Pedido",
+    // "attributes": [
+    //     {
+    //         "title": "_Id",
+    //         "type": "string"
+    //     },
+    //     {
+    //         "title": "Nome",
+    //         "type": "string"
+    //     },
+    //     {
+    //         "title": "Telefone",
+    //         "type": "string"
+    //     },
+    //     {
+    //         "title": "Email",
+    //         "type": "string"
+    //     },
+    //     {
+    //         "title": "Tipo",
+    //         "type": "string"
+    //     },
+    //     {
+    //         "title": "Tamanho",
+    //         "type": "string"
+    //     },
+    //     {
+    //         "title": "Quadro",
+    //         "type": "string"
+    //     },
+    //     {
+    //         "title": "Garfo",
+    //         "type": "string"
+    //     },
+    //     {
+    //         "title": "Guidão",
+    //         "type": "string"
+    //     },
+    //     {
+    //         "title": "Aro",
+    //         "type": "string"
+    //     },
+    //     {
+    //         "title": "Pedivela",
+    //         "type": "string"
+    //     },
+    //     {
+    //         "title": "Preço",
+    //         "type": "string"
+    //     },
+    //     {
+    //         "title": "Tempo",
+    //         "type": "string"
+    //     }
+    // ]
+}

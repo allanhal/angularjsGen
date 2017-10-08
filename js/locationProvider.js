@@ -7,8 +7,8 @@ app.config(['$locationProvider', function ($locationProvider) {
 app.config(function ($routeProvider) {
     $routeProvider
         .when('/', {
-            templateUrl: 'pages/home.html',
-            controller: 'mainController'
+            templateUrl: 'pages/gen.html',
+            controller: 'genController'
         })
         .when('/pedido', {
             templateUrl: 'pages/pedido.html',
