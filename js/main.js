@@ -62,7 +62,14 @@ function editorConfiguration() {
                                 type: "string"
                             }
                         }
-                    }
+                    },
+                    default: [
+                        {
+                            type: "string",
+                            attribute: "_id",
+                            display:"Id"
+                        }
+                    ]
                 }
             }
         }
