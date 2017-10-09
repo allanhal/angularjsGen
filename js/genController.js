@@ -9,6 +9,8 @@ var sidebarTemplate;
 var viewTemplate;
 var controllerTemplate;
 
+var editor;
+
 app.controller('genController', function ($scope, $http) {
 
     function loadTemplates() {
@@ -90,12 +92,14 @@ app.controller('genController', function ($scope, $http) {
             });
     }
 
-    function executeTemplate(params) {
+    function executeTemplate() {
         zipReset();
 
-        $.getJSON("json/pedido.json", function (pedidoJson) {
-            compile("pedido", pedidoJson)
-        })
+        var pedidoJson = editor.getValue()
+        compile("pedido", pedidoJson)
+        // $.getJSON("json/pedido.json", function (pedidoJson) {
+        //     compile("pedido", pedidoJson)
+        // })
     }
 
     function compile(name, json) {
@@ -115,5 +119,69 @@ app.controller('genController', function ($scope, $http) {
         zipGenerate()
     }
 
+    function editorConfiguration() {
+        JSONEditor.defaults.options.theme = 'bootstrap2';
+        JSONEditor.defaults.options.iconlib = "fontawesome4";
+        JSONEditor.defaults.options.disable_collapse = true;
+        JSONEditor.defaults.options.disable_edit_json = true;
+        JSONEditor.defaults.options.disable_properties = true;
+        // Initialize the editor with a JSON schema
+        editor = new JSONEditor(document.getElementById('editor_holder'), {
+            // Disable additional properties
+            no_additional_properties: true,
+            schema: {
+                type: "object",
+                title: "Create a new model",
+                properties: {
+                    urlApi: {
+                        type: "string",
+                        description: "Url para a api deste objeto",
+                        default: "https://rest-on-demand.herokuapp.com/api/"
+                    },
+                    name: {
+                        type: "string",
+                        default: "Pedido"
+                    },
+                    attributes: {
+                        type: "array",
+                        format: "table",
+                        title: "Attributes",
+                        uniqueItems: true,
+                        items: {
+                            type: "object",
+                            title: "Attribute",
+                            properties: {
+                                type: {
+                                    type: "string",
+                                    enum: [
+                                        "string",
+                                        "int"
+                                    ],
+                                    default: "string"
+                                },
+                                attribute: {
+                                    type: "string"
+                                },
+                                display: {
+                                    type: "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // Hook up the submit button to log to the console
+        document.getElementById('submit').addEventListener('click', function () {
+            // Get the value from the editor
+            var result = editor.getValue()
+
+            var blob = new Blob([JSON.stringify(result)], { type: "text/plain;charset=utf-8" });
+            saveAs(blob, "Pedido.json");
+        });
+    }
+
     zipReset()
+    editorConfiguration()
 });
