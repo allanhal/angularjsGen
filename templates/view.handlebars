@@ -23,8 +23,12 @@
                             </td>
                             {{/attributes }}
                             <td>
-                                <button class="btn btn-sm btn-primary" ng-click="edit{{ name }}({{firstLowerCase name }})"><i class="fa fa-pencil" aria-hidden="true"></i></button>
-                                <button class="btn btn-sm btn-danger" ng-click="remove{{ name }}({{firstLowerCase name }})"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                <button class="btn btn-sm btn-primary" ng-click="edit{{ name }}({{firstLowerCase name }})">
+                                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                                </button>
+                                <button class="btn btn-sm btn-danger" ng-click="remove{{ name }}({{firstLowerCase name }})">
+                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                </button>
                             </td>
                         </tr>
                     </tbody>
@@ -33,7 +37,8 @@
         </div>
         <div class="row py-3">
             <div class="col-12 text-right">
-                <button class="btn btn-sm btn-primary btn-lg" ng-click="refresh{{ name }}s()"><i class="fa fa-refresh" aria-hidden="true"></i> Atualizar</button>
+                <button class="btn btn-sm btn-primary btn-lg" ng-click="refresh{{ name }}s()">
+                    <i class="fa fa-refresh" aria-hidden="true"></i> Atualizar</button>
             </div>
         </div>
 
@@ -49,7 +54,8 @@
 
         <div class="row">
             <div class="col-12 text-right">
-                <button class="btn btn-sm btn-primary" ng-click="submit{{ name }}()" ng-disabled="!{{firstLowerCase name }}FormChanged"><i class="fa fa-pencil" aria-hidden="true"></i> Salvar</button>
+                <button class="btn btn-sm btn-primary" ng-click="submit{{ name }}()" ng-disabled="!{{firstLowerCase name }}FormChanged">
+                    <i class="fa fa-pencil" aria-hidden="true"></i> Salvar</button>
             </div>
         </div>
     </div>
