@@ -71,19 +71,19 @@ app.controller('genController', function ($scope, $http) {
         zipClient.file("readme.txt", "You read me")
     }
 
-    function zipAddRootHtml(title, content) {
+    function zipClientAddRootHtml(title, content) {
         zipClient.file(title + ".html", content);
     }
 
-    function zipAddPages(title, content) {
+    function zipClientAddPages(title, content) {
         zipClient.folder("pages").file(title + ".html", content);
     }
 
-    function zipAddJs(title, content) {
+    function zipClientAddJs(title, content) {
         zipClient.folder("js").file(title + ".js", content);
     }
 
-    function zipGenerate() {
+    function zipClientDownload() {
         zipClient.generateAsync({ type: "blob" })
             .then(function (content) {
                 saveAs(content, zipName + ".zip");
@@ -103,14 +103,16 @@ app.controller('genController', function ($scope, $http) {
 
         newJson.url = json.url + "/api/";
 
-        compileAllClientFiles(json.name, newJson)
+        createAllClientFiles(json.name, newJson)
+
+        zipClientDownload()
 
         zipClientReset();
 
         NProgress.done()
     }
 
-    function compileAllClientFiles(name, json) {
+    function createAllClientFiles(name, json) {
         defaultClientTemplates()
 
         var indexCompiled = Handlebars.compile(indexTemplate);
@@ -119,15 +121,13 @@ app.controller('genController', function ($scope, $http) {
         var viewTemplateCompiled = Handlebars.compile(viewTemplate);
         var controllerTemplateCompiled = Handlebars.compile(controllerTemplate);
 
-        zipAddRootHtml("index", indexCompiled(json))
+        zipClientAddRootHtml("index", indexCompiled(json))
 
-        zipAddJs("locationProvider", locationProviderTemplateCompiled(json))
-        zipAddRootHtml("sidebar", sidebarTemplateCompiled(json))
+        zipClientAddJs("locationProvider", locationProviderTemplateCompiled(json))
+        zipClientAddRootHtml("sidebar", sidebarTemplateCompiled(json))
 
-        zipAddRootHtml(name, viewTemplateCompiled(json))
-        zipAddJs(name, controllerTemplateCompiled(json))
-
-        zipGenerate()
+        zipClientAddRootHtml(name, viewTemplateCompiled(json))
+        zipClientAddJs(name, controllerTemplateCompiled(json))
     }
 
     $scope.downloadClientApp = downloadClientApp;
@@ -152,6 +152,24 @@ app.controller('genController', function ($scope, $http) {
         zipClientReset();
 
         NProgress.done()
+    }
+
+    function createAllServerFiles(name, json) {
+        // defaultClientTemplates()
+
+        // var indexCompiled = Handlebars.compile(indexTemplate);
+        // var locationProviderTemplateCompiled = Handlebars.compile(locationProviderTemplate);
+        // var sidebarTemplateCompiled = Handlebars.compile(sidebarTemplate);
+        // var viewTemplateCompiled = Handlebars.compile(viewTemplate);
+        // var controllerTemplateCompiled = Handlebars.compile(controllerTemplate);
+
+        // zipAddRootHtml("index", indexCompiled(json))
+
+        // zipClientAddJs("locationProvider", locationProviderTemplateCompiled(json))
+        // zipAddRootHtml("sidebar", sidebarTemplateCompiled(json))
+
+        // zipAddRootHtml(name, viewTemplateCompiled(json))
+        // zipClientAddJs(name, controllerTemplateCompiled(json))
     }
 
     $scope.downloadServerApp = downloadServerApp;
