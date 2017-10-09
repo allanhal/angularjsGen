@@ -9,9 +9,5 @@ app.config(function ($routeProvider) {
         .when('/', {
             templateUrl: 'pages/gen.html',
             controller: 'genController'
-        })
-        .when('/pedido', {
-            templateUrl: 'pages/pedido.html',
-            controller: 'pedidoController'
         });
 });

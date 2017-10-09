@@ -1,18 +1,53 @@
 var app = angular.module('app')
 
 var zip = new JSZip();
-var zipName = "angularJSapp";
+var zipName = "appAngularJS";
+
+var indexTemplate;
+var locationProviderTemplate;
+var sidebarTemplate;
 var viewTemplate;
 var controllerTemplate;
 
 app.controller('genController', function ($scope, $http) {
 
-    function loadTemplates(params) {
-        $.get('templates/pedido.handlebars', function (template) {
-            htmlTemplate.push(template);
+    function loadTemplates() {
+        $.get('templates/index.handlebars', function (template) {
+            indexTemplate = template;
+        }, 'html')
+
+        $.get('templates/locationProviderTemplate.js', function (template) {
+            locationProviderTemplate = template;
+        }, 'html')
+
+        $.get('templates/sidebar.handlebars', function (template) {
+            sidebarTemplate = template;
+        }, 'html')
+
+        $.get('templates/view.handlebars', function (template) {
+            viewTemplate = template;
+        }, 'html')
+
+        $.get('templates/controllerTemplate.js', function (template) {
+            controllerTemplate = template;
+        }, 'html')
+    }
+
+    function loadDefaultFiles() {
+        var files = ["footer", "header"]
+
+        files.forEach(function (element) {
+            $.get('templates/defaultFiles/' + element + '.html', function (template) {
+                zipAddRootHtml(element, template)
+            }, 'html')
+        }, this);
+
+        $.get('templates/defaultFiles/main.css', function (template) {
+            zipAddCss("main", template)
         }, 'html')
 
     }
+
     Handlebars.registerHelper('firstLowerCase', function (str) {
         return str.charAt(0).toLowerCase() + str.slice(1);
     });
@@ -21,25 +56,31 @@ app.controller('genController', function ($scope, $http) {
         return str.charAt(0).toUpperCase() + str.slice(1);
     });
 
-    $scope.executeZip = executeZip;
     $scope.executeTemplate = executeTemplate;
 
-    function executeZip(params) {
-        zipReset();
-        zipAddPage("Hello1.txt", "Hello World1")
-        zipAddPage("Hello2.txt", "Hello World2")
-        zipAddPage("Hello3.txt", "Hello World3")
-        zipGenerate()
-    }
-
     function zipReset() {
-        zip = new JSZip();
+        zip = new JSZip()
         zip = zip.folder(zipName)
-        zip.file("readme.txt", "You read me");
+        zip.file("readme.txt", "You read me")
+
+        loadTemplates()
+        loadDefaultFiles()
     }
 
-    function zipAddPage(title, content) {
-        zip.folder("pages").file(title, content);
+    function zipAddCss(title, content) {
+        zip.folder("css").file(title + ".css", content);
+    }
+
+    function zipAddRootHtml(title, content) {
+        zip.file(title + ".html", content);
+    }
+
+    function zipAddPages(title, content) {
+        zip.folder("pages").file(title + ".html", content);
+    }
+
+    function zipAddJs(title, content) {
+        zip.folder("js").file(title + ".js", content);
     }
 
     function zipGenerate() {
@@ -51,28 +92,28 @@ app.controller('genController', function ($scope, $http) {
 
     function executeTemplate(params) {
         zipReset();
-        $.get('templates/pedido.handlebars', function (template) {
-            htmlTemplate = template;
 
-            $.getJSON("json/pedido.json", function (pedidoJson) {
-
-                compile("pedido", pedidoTemplate, pedidoJson)
-
-            })
-
-        }, 'html')
+        $.getJSON("json/pedido.json", function (pedidoJson) {
+            compile("pedido", pedidoJson)
+        })
     }
 
-    function compile(name, template, json) {
+    function compile(name, json) {
+        var indexCompiled = Handlebars.compile(indexTemplate);
+        var locationProviderTemplateCompiled = Handlebars.compile(locationProviderTemplate);
+        var sidebarTemplateCompiled = Handlebars.compile(sidebarTemplate);
+        var viewTemplateCompiled = Handlebars.compile(viewTemplate);
+        var controllerTemplateCompiled = Handlebars.compile(controllerTemplate);
 
-        var templateCompiled = Handlebars.compile(template);
-        var result = templateCompiled(json)
+        zipAddRootHtml("index", indexCompiled(json))
+        zipAddJs("locationProvider", locationProviderTemplateCompiled(json))
+        zipAddRootHtml("sidebar", sidebarTemplateCompiled(json))
 
-        $("#compiled").html(result)
-        $("#compiledPre").text(result)
+        zipAddRootHtml(name, viewTemplateCompiled(json))
+        zipAddJs(name, controllerTemplateCompiled(json))
 
-        zipAddPage(name + ".html", result)
         zipGenerate()
-
     }
+
+    zipReset()
 });
