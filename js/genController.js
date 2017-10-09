@@ -4,6 +4,9 @@ var zip = new JSZip();
 var zipName = "appAngularJS";
 
 var indexTemplate;
+var headerTemplate;
+var footerTemplate;
+var cssTemplate;
 var locationProviderTemplate;
 var sidebarTemplate;
 var viewTemplate;
@@ -16,6 +19,14 @@ app.controller('genController', function ($scope, $http) {
     function loadTemplates() {
         $.get('templates/index.handlebars', function (template) {
             indexTemplate = template;
+        }, 'html')
+
+        $.get('templates/footer.html', function (template) {
+            footerTemplate = template;
+        }, 'html')
+
+        $.get('templates/header.html', function (template) {
+            headerTemplate = template;
         }, 'html')
 
         $.get('templates/locationProviderTemplate.js', function (template) {
@@ -33,30 +44,27 @@ app.controller('genController', function ($scope, $http) {
         $.get('templates/controllerTemplate.js', function (template) {
             controllerTemplate = template;
         }, 'html')
-    }
 
-    function loadDefaultFiles() {
-        var files = ["footer", "header"]
-
-        files.forEach(function (element) {
-            $.get('templates/defaultFiles/' + element + '.html', function (template) {
-                zipAddRootHtml(element, template)
-            }, 'html')
-        }, this);
-
-        $.get('templates/defaultFiles/main.css', function (template) {
-            zipAddCss("main", template)
+        $.get('templates/mainTemplate.css', function (template) {
+            cssTemplate = template;
         }, 'html')
-
     }
 
     Handlebars.registerHelper('firstLowerCase', function (str) {
-        return str.charAt(0).toLowerCase() + str.slice(1);
+        return firstLowerCase(str)
     });
 
     Handlebars.registerHelper('firstUpperCase', function (str) {
-        return str.charAt(0).toUpperCase() + str.slice(1);
+        return firstUpperCase(str)
     });
+
+    function firstLowerCase(str) {
+        return str.charAt(0).toLowerCase() + str.slice(1);
+    }
+
+    function firstUpperCase(str) {
+        return str.charAt(0).toUpperCase() + str.slice(1);
+    }
 
     $scope.executeTemplate = executeTemplate;
 
@@ -66,7 +74,6 @@ app.controller('genController', function ($scope, $http) {
         zip.file("readme.txt", "You read me")
 
         loadTemplates()
-        loadDefaultFiles()
     }
 
     function zipAddCss(title, content) {
@@ -95,21 +102,36 @@ app.controller('genController', function ($scope, $http) {
     function executeTemplate() {
         zipReset();
 
-        var pedidoJson = editor.getValue()
-        compile("pedido", pedidoJson)
-        // $.getJSON("json/pedido.json", function (pedidoJson) {
-        //     compile("pedido", pedidoJson)
-        // })
+        var json = editor.getValue()
+        var create = json.url + "/create/" + firstLowerCase(json.name);
+        $.get(create, function (data, status) {
+            alertify.success("Data: " + data + "\nStatus: " + status);
+        });
+
+        var newJson = jQuery.extend(true, {}, json);
+
+        newJson.url = json.url + "/api/";
+
+        compile(json.name, newJson)
     }
 
     function compile(name, json) {
         var indexCompiled = Handlebars.compile(indexTemplate);
+        var headerCompiled = Handlebars.compile(headerTemplate);
+        var footerCompiled = Handlebars.compile(footerTemplate);
+        var cssCompiled = Handlebars.compile(cssTemplate);
         var locationProviderTemplateCompiled = Handlebars.compile(locationProviderTemplate);
         var sidebarTemplateCompiled = Handlebars.compile(sidebarTemplate);
         var viewTemplateCompiled = Handlebars.compile(viewTemplate);
         var controllerTemplateCompiled = Handlebars.compile(controllerTemplate);
 
+        
         zipAddRootHtml("index", indexCompiled(json))
+        zipAddRootHtml("header", headerCompiled(json))
+        zipAddRootHtml("footer", footerCompiled(json))
+        
+        // zipAddCss("main", cssCompiled)
+
         zipAddJs("locationProvider", locationProviderTemplateCompiled(json))
         zipAddRootHtml("sidebar", sidebarTemplateCompiled(json))
 
@@ -127,16 +149,14 @@ app.controller('genController', function ($scope, $http) {
         JSONEditor.defaults.options.disable_properties = true;
         // Initialize the editor with a JSON schema
         editor = new JSONEditor(document.getElementById('editor_holder'), {
-            // Disable additional properties
-            no_additional_properties: true,
             schema: {
                 type: "object",
                 title: "Create a new model",
                 properties: {
-                    urlApi: {
+                    url: {
                         type: "string",
                         description: "Url para a api deste objeto",
-                        default: "https://rest-on-demand.herokuapp.com/api/"
+                        default: "https://rest-on-demand.herokuapp.com"
                     },
                     name: {
                         type: "string",
@@ -170,15 +190,6 @@ app.controller('genController', function ($scope, $http) {
                     }
                 }
             }
-        });
-
-        // Hook up the submit button to log to the console
-        document.getElementById('submit').addEventListener('click', function () {
-            // Get the value from the editor
-            var result = editor.getValue()
-
-            var blob = new Blob([JSON.stringify(result)], { type: "text/plain;charset=utf-8" });
-            saveAs(blob, "Pedido.json");
         });
     }
 

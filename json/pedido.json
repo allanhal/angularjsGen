@@ -1,5 +1,5 @@
 {
-    "urlApi": "https://quiet-crag-78158.herokuapp.com/api/",
+    "url": "https://quiet-crag-78158.herokuapp.com/api/",
     "name": "Pedido",
     "attributes": [
         {

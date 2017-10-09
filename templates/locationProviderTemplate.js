@@ -17,7 +17,7 @@ app.config(function ($routeProvider) {
 });
 
 app.controller('mainController', function ($scope, $http) {
-    $http.get('{{urlApi}}{{firstLowerCase name}}').
+    $http.get('{{url}}{{firstLowerCase name}}').
         then(function (response) {
             $scope.{{firstLowerCase name}}s = response.data;
         });

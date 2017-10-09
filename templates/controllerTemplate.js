@@ -6,7 +6,7 @@ app.controller('{{firstLowerCase name }}Controller', function ($scope, $http) {
         $scope.{{firstLowerCase name }}FormChanged = true;
     };
 
-    var urlRoot = "{{urlApi}}{{firstLowerCase name }}";
+    var urlRoot = "{{url}}{{firstLowerCase name }}";
     $scope.edit{{ name }} = function ({{firstLowerCase name }}) {
         if ($scope.{{firstLowerCase name }}FormChanged) {
             //
@@ -73,7 +73,7 @@ app.controller('{{firstLowerCase name }}Controller', function ($scope, $http) {
 
     $scope.refresh{{ name }}s = function () {
         $scope.{{firstLowerCase name }}FormChanged = false
-        $http.get('{{urlApi}}{{firstLowerCase name }}').
+        $http.get('{{url}}{{firstLowerCase name }}').
             then(function (response) {
                 $scope.{{firstLowerCase name }}s = response.data;
             });
