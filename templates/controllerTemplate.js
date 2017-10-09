@@ -2,6 +2,11 @@ var app = angular.module('app', ['ngRoute']);
 
 app.controller('{{firstLowerCase name }}Controller', function ($scope, $http) {
 
+    $http.get('{{url}}{{firstLowerCase name}}').
+    then(function (response) {
+        $scope.{{firstLowerCase name}}s = response.data;
+    });
+
     $scope.{{firstLowerCase name }}FormKeyUp = function () {
         $scope.{{firstLowerCase name }}FormChanged = true;
     };

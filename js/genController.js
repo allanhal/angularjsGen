@@ -17,16 +17,27 @@ var editor;
 app.controller('genController', function ($scope, $http) {
 
     function loadTemplates() {
+
+        $.get('templates/mainTemplate.css', function (template) {
+            var compiled = Handlebars.compile(template)
+            var content = compiled({})
+            zip.folder("css").file('main.css', content);
+        }, 'html')
+
+        $.get('templates/headerTemplate.html', function (template) {
+            var compiled = Handlebars.compile(template)
+            var content = compiled({})
+            zip.file('header.html', content);
+        }, 'html')
+
+        $.get('templates/footerTemplate.html', function (template) {
+            var compiled = Handlebars.compile(template)
+            var content = compiled({})
+            zip.file('footer.html', content);
+        }, 'html')
+
         $.get('templates/index.handlebars', function (template) {
             indexTemplate = template;
-        }, 'html')
-
-        $.get('templates/footer.html', function (template) {
-            footerTemplate = template;
-        }, 'html')
-
-        $.get('templates/header.html', function (template) {
-            headerTemplate = template;
         }, 'html')
 
         $.get('templates/locationProviderTemplate.js', function (template) {
@@ -45,9 +56,6 @@ app.controller('genController', function ($scope, $http) {
             controllerTemplate = template;
         }, 'html')
 
-        $.get('templates/mainTemplate.css', function (template) {
-            cssTemplate = template;
-        }, 'html')
     }
 
     Handlebars.registerHelper('firstLowerCase', function (str) {
@@ -66,18 +74,12 @@ app.controller('genController', function ($scope, $http) {
         return str.charAt(0).toUpperCase() + str.slice(1);
     }
 
-    $scope.executeTemplate = executeTemplate;
-
     function zipReset() {
         zip = new JSZip()
         zip = zip.folder(zipName)
         zip.file("readme.txt", "You read me")
 
         loadTemplates()
-    }
-
-    function zipAddCss(title, content) {
-        zip.folder("css").file(title + ".css", content);
     }
 
     function zipAddRootHtml(title, content) {
@@ -100,7 +102,7 @@ app.controller('genController', function ($scope, $http) {
     }
 
     function executeTemplate() {
-        zipReset();
+        NProgress.start()
 
         var json = editor.getValue()
         var create = json.url + "/create/" + firstLowerCase(json.name);
@@ -113,24 +115,20 @@ app.controller('genController', function ($scope, $http) {
         newJson.url = json.url + "/api/";
 
         compile(json.name, newJson)
+
+        zipReset();
+
+        NProgress.done()
     }
 
     function compile(name, json) {
         var indexCompiled = Handlebars.compile(indexTemplate);
-        var headerCompiled = Handlebars.compile(headerTemplate);
-        var footerCompiled = Handlebars.compile(footerTemplate);
-        var cssCompiled = Handlebars.compile(cssTemplate);
         var locationProviderTemplateCompiled = Handlebars.compile(locationProviderTemplate);
         var sidebarTemplateCompiled = Handlebars.compile(sidebarTemplate);
         var viewTemplateCompiled = Handlebars.compile(viewTemplate);
         var controllerTemplateCompiled = Handlebars.compile(controllerTemplate);
 
-        
         zipAddRootHtml("index", indexCompiled(json))
-        zipAddRootHtml("header", headerCompiled(json))
-        zipAddRootHtml("footer", footerCompiled(json))
-        
-        // zipAddCss("main", cssCompiled)
 
         zipAddJs("locationProvider", locationProviderTemplateCompiled(json))
         zipAddRootHtml("sidebar", sidebarTemplateCompiled(json))
@@ -147,7 +145,7 @@ app.controller('genController', function ($scope, $http) {
         JSONEditor.defaults.options.disable_collapse = true;
         JSONEditor.defaults.options.disable_edit_json = true;
         JSONEditor.defaults.options.disable_properties = true;
-        // Initialize the editor with a JSON schema
+
         editor = new JSONEditor(document.getElementById('editor_holder'), {
             schema: {
                 type: "object",
@@ -192,6 +190,8 @@ app.controller('genController', function ($scope, $http) {
             }
         });
     }
+
+    $scope.executeTemplate = executeTemplate;
 
     zipReset()
     editorConfiguration()

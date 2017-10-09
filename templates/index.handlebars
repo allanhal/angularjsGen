@@ -16,15 +16,12 @@
 	<link rel="stylesheet" href="css/main.css">
 </head>
 
-<body ng-controller="mainController">
+<body>
 
 	<div class="container-fluid">
 		<div ng-include="'header.html'"></div>
 		<div class="row">
-			<div class="col-2 sidebar-custom">
-				<div ng-include="'sidebar.html'"></div>
-			</div>
-			<div class="col-10 main-custom">
+			<div class="col-12 main-custom">
 				<div ng-view></div>
 			</div>
 		</div>
